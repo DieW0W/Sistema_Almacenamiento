@@ -1,0 +1,23 @@
+//paquete al que pertenece
+package Clases;
+
+//importacion de la interfaz que permitira el acceso a nuevos usuarioa
+import Formularios.FormLogin;
+//creacion de clase raiz (Ejecutable)
+public class Principal {
+    
+    public static void main(String[] args){
+        //creacion de objeto   
+        FormLogin x = new FormLogin();
+        //creacion de objeto de la clase raiz
+        Datos misDatos = new Datos();
+        //llamando al metodo "seDatos" dentro de la interfaz "FormLogin" que recibe una instancia que hace referencia a SetDatos
+        x.setDatos(misDatos);
+        //coloca la interfaz dentro de "FormLogin" en el centro de la Pantalla
+        x.setLocationRelativeTo(null);
+        //Coloca la interfaz "FormLogin" visible al usuario 
+        x.setVisible(true);
+        
+    }
+    
+}
