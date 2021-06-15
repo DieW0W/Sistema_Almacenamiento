@@ -1,0 +1,639 @@
+package Clases;
+//Exportacion de Libreria que permite leer caracteres ingresados por el usuario
+import java.io.BufferedReader;
+//Permite la representacion abstracta de una direccion de ruta de un archivo
+import java.io.File;
+//Permite la lectura de los Archivos a traves de la libreria anterior 
+import java.io.FileReader;
+//Permite la escitura de datos en los archivos de las rutas especificadas en la libreria File
+import java.io.FileWriter;
+//Permite la Impresion de los Datos dentro de los archivos
+import java.io.PrintWriter;
+//Importacion de libreria que permite usar fechas
+import java.util.Date;
+
+
+/**
+ *
+ * @author Die Martz
+ */
+public class Datos {
+
+    //Creando Objeto de la clase usuarios
+    private Usuarios musuarios[] = new Usuarios[50];
+    //Sentando un parametro de usuarios en 0
+    private int contadorUsuarios = 0;
+    //Colocando un numero maximo de usuarios
+    private int maxUsuarios = 50;
+
+    //Creando objeto de la calse productos 
+    private Productos miProducto[] = new Productos[30];
+    //Colocando contador de proctos en 0
+    private int contadorProductos = 0;
+    //Colocando un tope de productos
+    private int maxProductos = 30;
+
+    private int contadorClientes = 0;
+    private int maxClientes = 50;
+    //colocar el numero maximo de clientes despues de la declaracion la variable maxClientes
+    private Clientes misClientes[] = new Clientes[maxClientes];
+
+    public Datos() {
+       //Cargar los datos de los usuarios dentro de un archivo especificado
+       cargarUsuario();
+       // Carga los productos
+       cargarProducto();
+       //Carga los clientes      
+       cargarCliente();
+                
+    }
+    //metodo que permite la
+    public Usuarios[] getUsuario() {
+        return musuarios;
+
+    }
+
+    public Productos[] getProducto() {
+
+        return miProducto;
+    }
+
+    public Clientes[] getClientes() {
+        return misClientes;
+    }
+
+    //Validacion de que el usuario que se ingresa es correcto
+    public boolean validarUsuarios(String usuario, String pasword) {
+
+        for (int i = 0; i < contadorUsuarios; i++) {
+            if (musuarios[i].getIdUsuario().equals(usuario) && musuarios[i].getClave().equals(pasword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // retorna la posicion del usuario 
+    public int posicionUsuario(String usuario) {
+        for (int i = 0; i < contadorUsuarios; i++) {
+
+            if (musuarios[i].getIdUsuario().equals(usuario)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public int posicionProducto(String producto) {
+        for (int i = 0; i < contadorProductos; i++) {
+
+            if (miProducto[i].getIdProducto().equals(producto)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public int posicionCliente(String cliente) {
+        for (int i = 0; i < contadorClientes; i++) {
+
+            if (misClientes[i].getIdCliente().equals(cliente)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public int numeroUsuarios() {
+
+        return contadorUsuarios;
+    }
+
+    public int numeroProductos() {
+
+        return contadorProductos;
+    }
+
+    public int numeroClientes() {
+
+        return contadorClientes;
+    }
+
+    public String AgregarUsuario(Usuarios miUsuario) {
+        if (contadorUsuarios == maxUsuarios) {
+
+            return "Se ha Alcanzado el Maximo de Usuarios";
+
+        }
+
+        musuarios[contadorUsuarios] = miUsuario;
+
+        contadorUsuarios++;
+        return "Usuario Agregado Correctamente";
+
+    }
+
+    public String agregarProducto(Productos misPro) {
+        if (contadorProductos == maxProductos) {
+
+            return "Se ha Alcanzado el Maximo de Productos";
+
+        }
+
+        miProducto[contadorProductos] = misPro;
+
+        contadorProductos++;
+        return "Producto Agregado Correctamente";
+
+    }
+
+    public String agregarCliente(Clientes misClien) {
+        if (contadorClientes == maxClientes) {
+
+            return "Se ha Alcanzado el Maximo de Clientes";
+
+        }
+
+        misClientes[contadorClientes] = misClien;
+
+        contadorClientes++;
+        return "Cliente Agregado Correctamente";
+
+    }
+
+    public String modificarUsuario(Usuarios miUsuario, int pos) {
+
+        musuarios[pos].setNombre(miUsuario.getNombre());
+        musuarios[pos].setApellidos(miUsuario.getApellidos());
+        musuarios[pos].setClave(miUsuario.getClave());
+        musuarios[pos].setPerfil(miUsuario.getPerfil());
+
+        return "usuario modificado correctamente";
+    }
+
+    public String modificarProducto(Productos misProducto, int posp) {
+
+        miProducto[posp].setDescripcion(misProducto.getDescripcion());
+        miProducto[posp].setPrecio(misProducto.getPrecio());
+        miProducto[posp].setNota(misProducto.getNota());
+        miProducto[posp].setIva(misProducto.getIva());
+
+        return "producto modificado correctamente";
+    }
+
+    public String modificarClientes(Clientes misClien, int posc) {
+
+        misClientes[posc].setNombre(misClien.getNombre());
+        misClientes[posc].setIdentificacion(misClien.getIdentificacion());
+        misClientes[posc].setApellido(misClien.getApellido());
+        misClientes[posc].setDireccion(misClien.getDireccion());
+        misClientes[posc].setTelefono(misClien.getTelefono());
+        misClientes[posc].setColonia(misClien.getColonia());
+        misClientes[posc].setFnacimiento(misClien.getFnacimiento());
+        misClientes[posc].setFingreso(misClien.getFingreso());
+
+        return "cliente modificado correctamente";
+    }
+
+    public String borrarUsuario(int pos) {
+
+        for (int i = pos; i < contadorUsuarios - 1; i++) {
+
+            musuarios[i] = musuarios[i + 1];
+        }
+        contadorUsuarios--;
+
+        return "usuario borrado correctamente";
+    }
+
+    //metodo de borrar productos
+    public String borrarProducto(int posp) {
+
+        for (int i = posp; i < contadorProductos - 1; i++) {
+
+            miProducto[i] = miProducto[i + 1];
+        }
+        contadorProductos--;
+
+        return "producto borrado correctamente";
+    }
+
+    public String borrarCliente(int posc) {
+
+        for (int i = posc; i < contadorClientes - 1; i++) {
+
+            misClientes[i] = misClientes[i + 1];
+        }
+        contadorClientes--;
+
+        return "Cliente borrado correctamente";
+    }
+
+    public int buscarUsuarios(String usuario) {
+
+        for (int i = 0; i < contadorUsuarios; i++) {
+            if (musuarios[i].getIdUsuario().equals(usuario)) {
+
+                return i;
+            }
+        }
+        return - 1;
+    }
+
+    //Metodo de buscar productos
+    public int buscarProductos(String producto) {
+
+        for (int i = 0; i < contadorProductos; i++) {
+            if (miProducto[i].getIdProducto().equals(producto)) {
+
+                return i;
+            }
+        }
+        return - 1;
+    }
+
+    public int buscarClientes(String cliente) {
+
+        for (int i = 0; i < contadorClientes; i++) {
+            if (misClientes[i].getIdCliente().equals(cliente)) {
+
+                return i;
+            }
+        }
+        return - 1;
+    }
+
+    public void grabarTodo() {
+        grabarUsuarios();
+        grabarProducto();
+        grabarCliente();
+
+    }
+
+    private void grabarUsuarios() {
+        FileWriter fw = null;
+        PrintWriter pw = null;
+
+        try {
+
+            fw = new FileWriter("Date/usuarios.txt");
+            pw = new PrintWriter(fw);
+
+            for (int i = 0; i < contadorUsuarios; i++) {
+                pw.println(musuarios[i].toString());
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        } finally {
+
+            try {
+
+                if (fw != null) {
+
+                    fw.close();
+                }
+
+            } catch (Exception ex1) {
+
+                ex1.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public void cargarUsuario() {
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+
+        try {
+            archivo = new File("Date/usuarios.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+
+            int pos;
+            String aux;
+            String linea;
+
+            String idUsuario;
+            String nombres;
+            String apellidos;
+            String clave;
+            int perfil;
+
+            while ((linea = br.readLine()) != null) {
+                //Se extrae ID Usuario
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                idUsuario = aux;
+                linea = linea.substring(pos + 1);
+
+                //Se extrae Nombres
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                nombres = aux;
+                linea = linea.substring(pos + 1);
+
+                //Se extrae Apellidos
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                apellidos = aux;
+                linea = linea.substring(pos + 1);
+
+                //Se extrae Clave y Perfil
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                clave = aux;
+                linea = linea.substring(pos + 1);
+                perfil = new Integer(linea);
+
+                Usuarios miUsuario = new Usuarios(
+                        idUsuario,
+                        nombres,
+                        apellidos,
+                        clave,
+                        perfil);
+                musuarios[contadorUsuarios] = miUsuario;
+                contadorUsuarios++;
+            }
+        } catch (Exception ex1) {
+            ex1.printStackTrace();
+        } finally {
+            try {
+                if (fr != null) {
+                    fr.close();
+                }
+            } catch (Exception ex2) {
+                ex2.printStackTrace();
+            }
+        }
+
+    }
+
+    private void grabarProducto() {
+        FileWriter fw = null;
+        PrintWriter pw = null;
+
+        try {
+
+            fw = new FileWriter("Date/productos.txt");
+            pw = new PrintWriter(fw);
+
+            for (int i = 0; i < contadorProductos; i++) {
+                pw.println(miProducto[i].toString());
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        } finally {
+
+            try {
+
+                if (fw != null) {
+
+                    fw.close();
+                }
+
+            } catch (Exception ex1) {
+
+                ex1.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public void cargarProducto() {
+
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader bf = null;
+
+        try {
+
+            archivo = new File("Date/productos.txt");
+            fr = new FileReader(archivo);
+            bf = new BufferedReader(fr);
+
+            int pos;
+            String aux;
+            String linea;
+
+            String idProducto;
+            String descripcion;
+            int precio;
+            String nota;
+            int iva;
+
+            while ((linea = bf.readLine()) != null) {
+                //SE tra el id de producto
+                pos = linea.indexOf("|");
+                aux = linea.substring(0, pos);
+                idProducto = aux;
+                linea = linea.substring(pos + 1);
+
+                //se trae la descripcion
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                descripcion = aux;
+                linea = linea.substring(pos + 1);
+
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                precio = new Integer(aux);
+                linea = linea.substring(pos + 1);
+
+                pos = linea.indexOf("|");
+                aux = linea.substring(0, pos);
+                nota = aux;
+                linea = linea.substring(pos + 1);
+                iva = new Integer(linea);
+
+                Productos misProducto = new Productos(idProducto, descripcion, precio, nota, iva);
+                miProducto[contadorProductos] = misProducto;
+                contadorProductos++;
+            }
+
+        } catch (Exception ex1) {
+            ex1.printStackTrace();
+
+        } finally {
+
+            try {
+                if (fr != null) {
+                    fr.close();
+
+                }
+
+            } catch (Exception ex2) {
+                ex2.printStackTrace();
+            }
+
+        }
+
+    }
+
+    private void grabarCliente() {
+
+        FileWriter fw = null;
+        PrintWriter pw = null;
+
+        try {
+
+            fw = new FileWriter("Date/clientes.txt");
+            pw = new PrintWriter(fw);
+
+            for (int i = 0; i < contadorClientes; i++) {
+                pw.println(misClientes[i].toString());
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        } finally {
+
+            try {
+
+                if (fw != null) {
+
+                    fw.close();
+                }
+
+            } catch (Exception ex1) {
+
+                ex1.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public void cargarCliente() {
+
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader bf = null;
+
+        try {
+
+            archivo = new File("Date/clientes.txt");
+            fr = new FileReader(archivo);
+            bf = new BufferedReader(fr);
+
+            int pos;
+            String aux;
+            String linea;
+
+            String idCliente;
+            int identificacion;
+            String nombre;
+            String apellidos;
+            String direccion;
+            String telefono;
+            int colonia;
+            Date fnacimiento;
+            Date fingreso;
+
+            while ((linea = bf.readLine()) != null) {
+
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                idCliente = aux;
+                linea = linea.substring(pos + 1);
+
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                identificacion = new Integer(aux);
+                linea = linea.substring(pos + 1);
+
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                nombre = aux;
+                linea = linea.substring(pos + 1);
+
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                apellidos = aux;
+                linea = linea.substring(pos + 1);
+
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                direccion = aux;
+                linea = linea.substring(pos + 1);
+
+                pos = linea.indexOf("|");
+                aux = linea.substring(0, pos);
+                telefono = aux;
+                linea = linea.substring(pos + 1);
+
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                colonia = new Integer(aux);
+                linea = linea.substring(pos + 1);
+
+                pos = linea.indexOf('|');
+                aux = linea.substring(0, pos);
+                fnacimiento = new Date(aux);
+                linea = linea.substring(pos + 1);
+                fingreso = new Date(linea);
+
+                Clientes miCliente = new Clientes(idCliente, identificacion, nombre, apellidos, direccion, telefono, colonia, fnacimiento, fingreso);
+                misClientes[contadorClientes] = miCliente;
+                contadorClientes++;
+
+            }
+
+        } catch (Exception ex1) {
+
+            ex1.printStackTrace();
+
+        } finally {
+
+            try {
+                if (fr != null) {
+                    fr.close();
+
+                }
+
+            } catch (Exception ex2) {
+                ex2.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public int getPerfil(String usuario) {
+
+        for (int i = 0; i < contadorUsuarios; i++) {
+            if (musuarios[i].getIdUsuario().equals(usuario)) {
+
+                return musuarios[i].getPerfil();
+            }
+
+        }
+        return -1;
+
+    }
+
+    public void cambioClave(String usuario, String clave) {
+
+        for (int i = 0; i < contadorUsuarios; i++) {
+
+            if (musuarios[i].getIdUsuario().equals(usuario)) {
+
+                musuarios[i].setClave(clave);
+                return;
+            }
+        }
+
+    }
+
+}
