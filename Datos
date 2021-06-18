@@ -44,26 +44,31 @@ public class Datos {
        // Carga los productos
        cargarProducto();
        //Carga los clientes      
-       cargarCliente();
-                
+       cargarCliente();       
     }
-    //metodo que permite la
+
+    //Trae todos los usuarios
+
     public Usuarios[] getUsuario() {
         return musuarios;
 
     }
 
+    //Trae todos los productos
+
     public Productos[] getProducto() {
 
         return miProducto;
     }
+    //Trae todos los clientes
 
     public Clientes[] getClientes() {
         return misClientes;
     }
 
     //Validacion de que el usuario que se ingresa es correcto
-    public boolean validarUsuarios(String usuario, String pasword) {
+    
+     public boolean validarUsuarios(String usuario, String pasword) {
 
         for (int i = 0; i < contadorUsuarios; i++) {
             if (musuarios[i].getIdUsuario().equals(usuario) && musuarios[i].getClave().equals(pasword)) {
@@ -73,7 +78,8 @@ public class Datos {
         return false;
     }
 
-    // retorna la posicion del usuario 
+    // retorna un usuario especifico
+
     public int posicionUsuario(String usuario) {
         for (int i = 0; i < contadorUsuarios; i++) {
 
@@ -81,9 +87,10 @@ public class Datos {
                 return i;
             }
         }
-
         return -1;
     }
+
+    // Retorna un producto especifico
 
     public int posicionProducto(String producto) {
         for (int i = 0; i < contadorProductos; i++) {
@@ -107,26 +114,28 @@ public class Datos {
         return -1;
     }
 
-    public int numeroUsuarios() {
+    // Métodos de devolución de la cantidad de usuarios/productos/clientes
 
+    public int numeroUsuarios() {
         return contadorUsuarios;
     }
 
     public int numeroProductos() {
-
         return contadorProductos;
     }
 
     public int numeroClientes() {
-
         return contadorClientes;
     }
 
+   // Métodos de creación de nuevos usuarios/productos/clientes
+
     public String AgregarUsuario(Usuarios miUsuario) {
+        
+        // Validación del número máximo establecido de usuarios
+
         if (contadorUsuarios == maxUsuarios) {
-
             return "Se ha Alcanzado el Maximo de Usuarios";
-
         }
 
         musuarios[contadorUsuarios] = miUsuario;
@@ -164,6 +173,7 @@ public class Datos {
 
     }
 
+   // Edición de usuarios
     public String modificarUsuario(Usuarios miUsuario, int pos) {
 
         musuarios[pos].setNombre(miUsuario.getNombre());
@@ -265,7 +275,8 @@ public class Datos {
         }
         return - 1;
     }
-
+    
+    // Guarda todos los datos dentro de los archivos externos
     public void grabarTodo() {
         grabarUsuarios();
         grabarProducto();
