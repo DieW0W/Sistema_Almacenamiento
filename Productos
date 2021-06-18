@@ -1,0 +1,75 @@
+package Clases;
+
+/**
+ *
+ * @author Die Martz
+ */
+public class Productos {
+    
+    private String idProducto;
+    private String descripcion;
+    private int precio;
+    private String nota;
+    private int iva;
+   
+    public Productos(String idProducto, String descripcion, int precio, String nota, int iva) {
+        this.idProducto = idProducto;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.nota = nota;
+        this.iva = iva;
+    }
+
+    public String getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(String idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+
+    public int getIva() {
+        return iva;
+    }
+
+    public void setIva(int iva) {
+        this.iva = iva;
+    }
+    
+    
+    @Override
+    public String toString(){
+        return idProducto + "|"
+                + descripcion + "|"
+                + precio + "|"
+                + nota + "|"
+                + iva;
+        
+    }
+    
+    
+}
