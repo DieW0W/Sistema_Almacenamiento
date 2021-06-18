@@ -1,0 +1,122 @@
+package Clases;
+
+import java.util.Date;
+
+/**
+ *
+ * @author Die Martz
+ */
+public class Clientes {
+    
+    private String idCliente;
+    private int identificacion;
+    private String nombre;
+    private String apellido;
+    private String direccion;
+    private String telefono;
+    private int colonia;
+    private Date fnacimiento;
+    private Date fingreso;
+
+    public Clientes(String idCliente, int identificacion, String nombre, String apellido, String direccion, String telefono, int colonia, Date fnacimiento, Date fingreso) {
+        this.idCliente = idCliente;
+        this.identificacion = identificacion;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.colonia = colonia;
+        this.fnacimiento = fnacimiento;
+        this.fingreso = fingreso;
+    }
+
+    public String getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public int getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(int identificacion) {
+        this.identificacion = identificacion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public int getColonia() {
+        return colonia;
+    }
+
+    public void setColonia(int colonia) {
+        this.colonia = colonia;
+    }
+
+    public Date getFnacimiento() {
+        return fnacimiento;
+    }
+
+    public void setFnacimiento(Date fnacimiento) {
+        this.fnacimiento = fnacimiento;
+    }
+
+    public Date getFingreso() {
+        return fingreso;
+    }
+
+    public void setFingreso(Date fingreso) {
+        this.fingreso = fingreso;
+    }
+    
+    
+    @Override
+    public String toString(){
+        
+        return idCliente + "|"
+                + identificacion + "|"
+                + nombre + "|"
+                + apellido + "|"
+                + direccion + "|"
+                + telefono + "|"
+                + colonia + "|"
+                + fnacimiento + "|"
+                + fingreso;
+        
+    }
+            
+    
+}
