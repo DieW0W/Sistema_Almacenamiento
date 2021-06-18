@@ -1,0 +1,72 @@
+package Clases;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ *
+ * @author Die Martz
+ */
+public class Utilidades {
+
+    public static boolean esNumerico(String cadena) {
+
+        try {
+
+            Integer.parseInt(cadena);
+
+            return true;
+
+        } catch (NumberFormatException e) {
+
+            return false;
+        }
+    }
+
+    public static Date stringtoDate(String fecha) {
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/YYYY");
+        Date aux = null;
+
+        try {
+
+            aux = formato.parse(fecha);
+        } catch (Exception e) {
+
+        }
+        return aux;
+    }
+
+    public static String fechaformato(Date fn) {
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/YYYY");
+        return formato.format(fn).toString();
+
+    }
+
+    public static int objectToInt(Object Obj) {
+        int NumInt = Integer.parseInt(objectToString(Obj));
+        return NumInt;
+    }
+
+    public static double objectToDouble(Object Obj) {
+        String Str = Obj.toString();
+        double NumDouble = Double.valueOf(Str).doubleValue();
+        return NumDouble;
+    }
+
+    public static boolean objectToBoolean(Object Obj) {
+        String CadBooleana = objectToString(Obj);
+        Boolean booleano = new Boolean(CadBooleana);
+        return booleano;
+    }
+
+    public static String objectToString(Object Obj) {
+        String Str = "";
+        if (Obj != null) {
+            Str = Obj.toString();
+        }
+        return Str;
+    }
+
+}
