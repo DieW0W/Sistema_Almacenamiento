@@ -1,0 +1,134 @@
+package Formularios;
+
+import Clases.Datos;
+import Clases.Fondos;
+
+
+/**
+ *
+ * @author Die Martz
+ */
+public class FormMenu extends javax.swing.JFrame {
+
+    /**
+     * Creates new form FormMenu
+     */
+    
+   
+    private Datos misDatos;
+    private int perfil;
+    private String clave;
+    private String usuario;
+    
+    
+    public FormMenu() {
+        initComponents();
+        
+        //dspEscritorio.setBorder(new Fondos());
+        
+    }
+    
+    public void setDatos(Datos misDatos){
+        
+        this.misDatos = misDatos;
+        
+    }
+    
+    public void setPerfil(int perfil){
+        
+        this.perfil = perfil;
+    }
+    public void setClave(String clave){
+        
+        this.clave = clave;
+    }
+    public void setUsuario(String usuario){
+        
+        this.usuario = usuario;
+    }
+    
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+        FormUsuarios c = new FormUsuarios();
+        c.setDatos(misDatos);
+        dspEscritorio.add(c);
+        c.show();
+    }                                           
+
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+        
+        FormProductos p = new FormProductos();
+        p.setDatos(misDatos);
+        dspEscritorio.add(p);
+        p.show();
+    }                                            
+
+    private void mniClientesActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+        FormClientes u = new FormClientes();
+        u.setDatos(misDatos);
+        dspEscritorio.add(u);
+        u.show();
+    }                                           
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
+        // TODO add your handling code here:
+       
+       ((Fondos) dspEscritorio).setImagen("/Iconos/Abstracto.jpg");
+       
+       if(perfil == 2){
+           
+           btnUsuarios.setVisible(false);
+           btnProductos.setVisible(false);
+           mniClientes.setVisible(false);
+           mniReportes.setVisible(false);
+           
+       }
+   
+    }                                 
+
+    private void mniSalirActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        
+        misDatos.grabarTodo();
+        System.exit(0);
+    }                                        
+
+    private void btnCambioClaveActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+        
+        FormCambioClave c = new FormCambioClave(this, rootPaneCheckingEnabled);
+        c.setClave(clave);
+        c.setUsuario(usuario);
+        c.setDatos(misDatos);
+        c.setLocationRelativeTo(null);
+        c.setVisible(true);
+         
+        
+    }                                              
+
+    private void btnAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+        
+        
+        FormAcercaDe ac = new FormAcercaDe(this, rootPaneCheckingEnabled);
+        ac.setLocationRelativeTo(null);
+        ac.setVisible(true);
+        
+    
+        
+    }                                           
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+        this.dispose();
+        FormLogin fl = new FormLogin();
+        //para traer de nuev
+        fl.setDatos(misDatos);
+        fl.setLocationRelativeTo(null);
+        fl.setVisible(true);
+        
+        
+    }    
+© 2021 GitHub, Inc.
