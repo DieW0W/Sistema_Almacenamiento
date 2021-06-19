@@ -1,0 +1,67 @@
+package Formularios;
+
+import Clases.Datos;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Die Martz
+ */
+public class FormLogin extends javax.swing.JFrame {
+
+    /**
+     * Creates new form FormLogin
+     */
+    private Datos misDatos;
+
+    public FormLogin() {
+        initComponents();
+    }
+
+    public void setDatos(Datos misDatos) {
+
+        this.misDatos = misDatos;
+    }
+
+    private String perfil(int idPerfil) {
+
+        if (idPerfil == 1) {
+
+            return "Administrador";
+        } else {
+
+            return "Empleado";
+        }
+    }
+    
+    
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        // TODO add your handling code here:
+
+        //importacion
+        //Datos misDatos = new Datos();
+        if (!misDatos.validarUsuarios(txtUsuario.getText(), new String(txtContraseña.getPassword()))) {
+            JOptionPane.showMessageDialog(rootPane, "Usaurio y Contraseña Incorrectos");
+            txtUsuario.setText("");
+            txtContraseña.setText("");
+            txtUsuario.requestFocus();
+            return;
+        }
+        FormMenu intfz = new FormMenu();
+
+        //Herencia
+        intfz.setPerfil(misDatos.getPerfil(txtUsuario.getText()));
+        intfz.lblPerfil.setText(perfil(misDatos.getPerfil(txtUsuario.getText())));
+        intfz.setClave(new String(txtContraseña.getPassword()));
+        intfz.setUsuario(txtUsuario.getText());
+        intfz.setDatos(misDatos);
+        intfz.setVisible(true);
+        intfz.setLocationRelativeTo(null);
+        intfz.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        this.dispose();
+      
+
+    }                                       
